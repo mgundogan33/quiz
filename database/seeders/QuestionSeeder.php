@@ -2,25 +2,18 @@
 
 namespace Database\Seeders;
 
-
-
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
-class DatabaseSeeder extends Seeder
+class QuestionSeeder extends Seeder
 {
     /**
-     * Seed the application's database.
+     * Run the database seeds.
      *
      * @return void
      */
     public function run()
     {
-        $this->call([
-            UserSeeder::class,
-            QuizSeeder::class,
-            QuestionSeeder::class,
-
-        ]);
+        \App\Models\Question::factory(50)->create();
     }
 }
