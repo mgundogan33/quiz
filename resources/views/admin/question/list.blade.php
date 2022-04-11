@@ -2,11 +2,9 @@
     <x-slot name="header">{{ $quiz->title }}Quizine ait Sorular</x-slot>
     <div class="card">
         <div class="card-body">
-            <h5 class="card-title">
+            <h5 class="card-title d-flex">
                 <a href="{{ route('quizzes.index', $quiz->id) }}" class="btn btn-sm btn-warning"> <i
                         class="fa fa-arrow-left"></i> Quizlere Dön</a>
-            </h5>
-            <h5 class="card-title float-right">
                 <a href="{{ route('questions.create', $quiz->id) }}" class="btn btn-sm btn-primary"> <i
                         class="fa fa-plus"></i> Soru Oluştur</a>
             </h5>
