@@ -5,7 +5,26 @@
             <h5 class="card-title">
                 <a href="{{ route('quizzes.create') }}" class="btn btn-sm btn-primary"> <i class="fa fa-plus"></i>
                     Quiz Oluştur</a>
+                @if(request()->get('title') || request()->get('status'))
+                <a href="{{ route('quizzes.index') }}" class="btn btn-warning btn-sm ">Sıfırla</a>
+                @endif
             </h5>
+            <form method="GET" action="">
+                <div class="form-now">
+                    <div class="col-md-3">
+                        <input type="text" name="title" value="{{ request()->get('title') }}" placeholder="Quiz Adı"
+                            class="form-control">
+                    </div>
+                    <div class="col-md-3">
+                        <select class="form-control" onchange="this.form.submit()" name="status">
+                            <option value="">Durum Seçiniz</option>
+                            <option @if (request()->get('status') == 'publish') selected @endif value="publish">Aktif</option>
+                            <option @if (request()->get('status') == 'passive') selected @endif value="passive">Pasif</option>
+                            <option @if (request()->get('status') == 'draft') selected @endif value="draft">Taslak</option>
+                        </select>
+                    </div><br>
+                </div>
+            </form>
             <table class="table table-bordered">
                 <thead>
                     <tr>
@@ -54,7 +73,7 @@
                     @endforeach
                 </tbody>
             </table>
-            {{ $quizzes->links() }}
+            {{ $quizzes->withQueryString()->links() }}
         </div>
     </div>
 </x-app-layout>
