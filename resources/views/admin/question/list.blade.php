@@ -3,6 +3,10 @@
     <div class="card">
         <div class="card-body">
             <h5 class="card-title">
+                <a href="{{ route('quizzes.index', $quiz->id) }}" class="btn btn-sm btn-warning"> <i
+                        class="fa fa-arrow-left"></i> Quizlere Dön</a>
+            </h5>
+            <h5 class="card-title float-right">
                 <a href="{{ route('questions.create', $quiz->id) }}" class="btn btn-sm btn-primary"> <i
                         class="fa fa-plus"></i> Soru Oluştur</a>
             </h5>
@@ -23,7 +27,8 @@
                         <td>{{ $question->question }}</td>
                         <td>
                             @if ($question->image)
-                                <a href="{{ asset($question->image) }}" target="_blank"  class="btn btn-sm btn-light">Görüntüle</a>
+                                <a href="{{ asset($question->image) }}" target="_blank"
+                                    class="btn btn-sm btn-light">Görüntüle</a>
                             @endif
                         </td>
                         <td>{{ $question->answer1 }}</td>
@@ -35,8 +40,8 @@
                         <td>
                             <a href="{{ route('questions.edit', [$quiz->id, $question->id]) }}"
                                 class="btn btn-sm btn-primary"><i class="fa fa-pen"></i></a>
-                            <a href="{{ route('quizzes.destroy', $question->id) }}" class="btn btn-sm btn-danger"><i
-                                    class="fa fa-times"></i></a>
+                            <a href="{{ route('questions.destroy', [$quiz->id, $question->id]) }}"
+                                class="btn btn-sm btn-danger"><i class="fa fa-times"></i></a>
                         </td>
                         </tr>
                     @endforeach
