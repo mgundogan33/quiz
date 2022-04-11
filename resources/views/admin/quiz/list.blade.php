@@ -2,15 +2,18 @@
     <x-slot name="header">Quizler</x-slot>
     <div class="card">
         <div class="card-body">
-            <h5 class="card-title">
-                <a href="{{ route('quizzes.create') }}" class="btn btn-sm btn-primary"> <i class="fa fa-plus"></i>
-                    Quiz Oluştur</a>
-                @if(request()->get('title') || request()->get('status'))
-                <a href="{{ route('quizzes.index') }}" class="btn btn-warning btn-sm ">Sıfırla</a>
-                @endif
-            </h5>
+
+
+
+
             <form method="GET" action="">
-                <div class="form-now">
+
+
+
+
+                <div class="row g-3 mb-3 align-items-center">
+
+
                     <div class="col-md-3">
                         <input type="text" name="title" value="{{ request()->get('title') }}" placeholder="Quiz Adı"
                             class="form-control">
@@ -22,8 +25,22 @@
                             <option @if (request()->get('status') == 'passive') selected @endif value="passive">Pasif</option>
                             <option @if (request()->get('status') == 'draft') selected @endif value="draft">Taslak</option>
                         </select>
-                    </div><br>
+                    </div>
+
+                    <div class="col-md-2">
+                        @if (request()->get('title') || request()->get('status'))
+                            <a href="{{ route('quizzes.index') }}" class="btn btn-warning btn-sm ">Sıfırla</a>
+                        @endif
+                    </div>
+                    <div class="col-md-4 text-right">
+                        <a href="{{ route('quizzes.create') }}" class="btn btn-sm btn-primary"> <i
+                            class="fa fa-plus"></i>
+                        Quiz Oluştur</a>
+                    </div>
+
+
                 </div>
+
             </form>
             <table class="table table-bordered">
                 <thead>
