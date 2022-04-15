@@ -10,7 +10,7 @@ use Cviebrock\EloquentSluggable\Sluggable;
 class Quiz extends Model
 {
     use HasFactory, Sluggable;
-    protected  $fillable = ['title', 'description', 'finished_at','slug'];
+    protected  $fillable = ['title', 'description','status', 'finished_at','slug'];
 
     protected $dates = ['finished_at'];
     public function getFinishedAtAttribute($date)
