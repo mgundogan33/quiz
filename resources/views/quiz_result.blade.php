@@ -2,6 +2,7 @@
     <x-slot name="header">{{ $quiz->title }} Sonucu</x-slot>
     <div class="card">
         <div class="card-body">
+            <h3>Puan : <strong>{{ $quiz->my_result->point }}</strong></h3>
             <div class="alert alert-info">
                 <i class="fa fa-square"></i> İşaretlediğin Şık<br>
                 <i class="fa fa-check text-success"></i> Doğru Cevap<br>
@@ -17,6 +18,8 @@
                 @if ($question->image)
                     <img src="{{ asset($question->image) }}" style="width:45%" class="img-responsive">
                 @endif
+                <br>
+                <small>Bu soruya <strong>%{{ $question->true_percent }}</strong> oranında doğru cevap verildi</small>
                 <div class="form-check mt-2">
 
                     @if ('answer1' == $question->correct_answer)
