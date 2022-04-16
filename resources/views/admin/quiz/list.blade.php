@@ -34,8 +34,8 @@
                     </div>
                     <div class="col-md-4 text-right">
                         <a href="{{ route('quizzes.create') }}" class="btn btn-sm btn-primary"> <i
-                            class="fa fa-plus"></i>
-                        Quiz Oluştur</a>
+                                class="fa fa-plus"></i>
+                            Quiz Oluştur</a>
                     </div>
 
 
@@ -60,7 +60,13 @@
                             <td>
                                 @switch($quiz->status)
                                     @case('publish')
-                                        <span class="btn btn-success">Aktif</span>
+                                        @if (!$quiz->finished_at)
+                                            <span class="badge bg-success">Aktif</span>
+                                        @elseif ($quiz->finished_at > now())
+                                            <span class="badge bg-success">Aktif</span>
+                                        @else
+                                            <span class="badge bg-secondary text-white">Tarihi Dolmuş</span>
+                                        @endif
                                     @break
 
                                     @case('passive')
@@ -78,6 +84,11 @@
                                     title="{{ $quiz->finished_at }}">{{ $quiz->finished_at ? $quiz->finished_at->diffForHumans() : '-' }}</span>
                             </td>
                             <td>
+
+                                <a href="{{ route('quizzes.details', $quiz->id) }}" class="btn btn-sm btn-secondary">
+                                    <i class="fa fa-info-circle"></i>
+                                </a>
+
                                 <a href="{{ route('questions.index', $quiz->id) }}" class="btn btn-sm btn-warning">
                                     <i class="fa fa-question"></i></a>
 
