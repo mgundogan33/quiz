@@ -2,22 +2,27 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\Quiz;
 use App\Models\Answer;
 use App\Models\Result;
+use Illuminate\Http\Request;
+
 
 class MainController extends Controller
 {
     public function dashboard()
     {
-        $quizzes = Quiz::where('status', 'publish')->withCount('questions')->paginate(2);
-        return view('dashboard', compact('quizzes'));
+        $quizzes = Quiz::where('status', 'publish')->where(function ($query) {
+            $query->whereNull('finished_at')->orWhere('finished_at', '>', now());
+        })->withCount('questions')->paginate(2);
+
+        $results = auth()->user()->results;
+        return view('dashboard', compact('quizzes', 'results'));
     }
 
     public function quiz($slug)
     {
-        $quiz = Quiz::whereSlug($slug)->with('questions.my_answer','my_result')->first() ?? abort('Quiz Bulunamadı');
+        $quiz = Quiz::whereSlug($slug)->with('questions.my_answer', 'my_result')->first() ?? abort('Quiz Bulunamadı');
         if ($quiz->my_result) {
             return view('quiz_result', compact('quiz'));
         }

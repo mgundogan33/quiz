@@ -59,7 +59,8 @@
                                             <strong class="h5">{{ $loop->iteration }}.</strong>
                                             <img class="w-8 h-8 rounded-full"
                                                 src="{{ $result->user->profile_photo_url }}">
-                                            <span @if(auth()->user()->id==$result->user_id) class="text-danger" @endif>{{ $result->user->name }}</span>
+                                            <span
+                                                @if (auth()->user()->id == $result->user_id) class="text-danger" @endif>{{ $result->user->name }}</span>
                                             <span class="badge bg-success badge-pill">{{ $result->point }}</span>
                                         </li>
                                     @endforeach
@@ -74,7 +75,7 @@
                         <a href="{{ route('quiz.join', $quiz->slug) }}"
                             class="btn btn-primary btn-block btn-sm">Quiz'i
                             Görüntüle</a>
-                    @else
+                    @elseif($quiz->finished_at>now())
                         <a href="{{ route('quiz.join', $quiz->slug) }}"
                             class="btn btn-primary btn-block btn-sm">Quize
                             Katıl</a>
